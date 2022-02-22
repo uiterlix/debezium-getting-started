@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-debezium 
-  namespace: demo
+  namespace: informationgrid
 spec:
   replicas: 1
   selector:
@@ -22,7 +22,7 @@ spec:
           value: mysqluser
         - name: MYSQL_PASSWORD
           value: mysqlpw          
-        image: debezium/example-mysql:1.8
+        image: uiterlix/debezium-mysql-demo:1.9
         imagePullPolicy: Always
         name: mysql-debezium
         ports:

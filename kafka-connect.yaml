@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kafka-connect
-  namespace: demo
+  namespace: informationgrid
 spec:
   replicas: 1
   selector:
@@ -21,8 +21,10 @@ spec:
         - name: OFFSET_STORAGE_TOPIC
           value: my_connect_offsets
         - name: STATUS_STORAGE_TOPIC
-          value: my_connect_statuses          
-        image: debezium/connect:1.8
+          value: my_connect_statuses
+        - name: CONNECT_BOOTSTRAP_SERVERS
+          value: 10.211.55.3:9092  
+        image: uiterlix/debezium-connect:1.9
         imagePullPolicy: Always
         name: kafka-connect
         ports:

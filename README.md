@@ -19,6 +19,7 @@ Verify the mysql database is up and running and contains demo content. Access th
 ```
 kubectl exec --stdin --tty `kubectl get pods --namespace demo |grep mysql|cut -c1-36` /bin/bash --namespace demo
 mysql -uroot -pdebezium
+ALTER USER 'debezium'@'%' IDENTIFIED WITH mysql_native_password BY 'dbz';
 use inventory;
 select * from customers;
 ```
