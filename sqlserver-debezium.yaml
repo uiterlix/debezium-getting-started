@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlserver-debezium 
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sqlserver-debezium 
+  template:
+    metadata:
+      labels:
+        app: sqlserver-debezium 
+    spec:
+      hostname: sqlserver
+      containers:
+      - env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MSSQL_PID
+          value: Standard
+        - name: SA_PASSWORD
+          value: D3b3z17m
+        - name: MSSQL_AGENT_ENABLED
+          value: "true"                     
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        imagePullPolicy: Always
+        name: sqlserver-debezium
+        ports:
+        - containerPort: 1433
+          name: sqlserver
+          protocol: TCP
+      restartPolicy: Always

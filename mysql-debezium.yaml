@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-debezium 
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-debezium 
+  template:
+    metadata:
+      labels:
+        app: mysql-debezium 
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: debezium
+        - name: MYSQL_USER
+          value: mysqluser
+        - name: MYSQL_PASSWORD
+          value: mysqlpw          
+        image: debezium/example-mysql:1.8
+        imagePullPolicy: Always
+        name: mysql-debezium
+        ports:
+        - containerPort: 3306
+          name: mysql
+          protocol: TCP
+      restartPolicy: Always

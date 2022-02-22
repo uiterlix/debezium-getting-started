@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-connect
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-connect
+  template:
+    metadata:
+      labels:
+        app: kafka-connect
+    spec:
+      containers:
+      - env:
+        - name: CONFIG_STORAGE_TOPIC
+          value: my_connect_configs
+        - name: OFFSET_STORAGE_TOPIC
+          value: my_connect_offsets
+        - name: STATUS_STORAGE_TOPIC
+          value: my_connect_statuses          
+        image: debezium/connect:1.8
+        imagePullPolicy: Always
+        name: kafka-connect
+        ports:
+        - containerPort: 8083
+          name: connect
+          protocol: TCP
+      restartPolicy: Always
