@@ -25,7 +25,7 @@ select * from customers;
 ```
 Install the mysql inventory connector in debezium in the kafka connect container. Please note the "minikube.local" hostname in the fragments below, please replace that with the hostname or IP of your k8s cluster.
 
-`curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" minikube.local:8083/connectors/ -d '{ "name": "inventory-connector", "config": { "connector.class": "io.debezium.connector.mysql.MySqlConnector", "tasks.max": "1", "database.hostname": "mysql", "database.port": "3306", "database.user": "debezium", "database.password": "dbz", "database.server.id": "184054", "database.server.name": "dbserver1", "database.include.list": "inventory", "database.history.kafka.bootstrap.servers": "kafka:9092", "database.history.kafka.topic": "dbhistory.inventory" } }'`
+`curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" minikube.local:8083/connectors/ -d '{ "name": "inventory-connector", "config": { "connector.class": "io.debezium.connector.mysql.MySqlConnector", "tasks.max": "1", "database.hostname": "mysql", "database.port": "3306", "database.user": "debezium", "database.password": "dbz", "database.server.id": "184054", "database.server.name": "dbserver1", "database.include.list": "inventory", "database.history.kafka.bootstrap.servers": "10.211.55.3:9092", "database.history.kafka.topic": "dbhistory.inventory" } }'`
 
 Verify the connector is installed.
 
