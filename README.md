@@ -9,7 +9,7 @@ Install the following tutorial containers
 
 ```
 kubectl apply -f demo-ns.yaml
-kubectl apply -f kafka.yaml
+helm install -f kafka-values.yaml kafka bitnami/kafka --kube-context brutus
 kubectl apply -f mysql-debezium.yaml
 kubectl apply -f mysql-nodeport.yaml
 kubectl apply -f kafka-connect.yaml
